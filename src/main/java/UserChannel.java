@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserChannel{
+public class UserChannel implements IUserChannel {
     private String name;
     private List<Subscriber> subscribers = new ArrayList<>();  // List of subscribers
 
@@ -21,7 +21,8 @@ public class UserChannel{
                 messageInputField.setText("");  // Clear input field after message is sent
                 messageInputField.setCaretColor(Color.WHITE);
 
-                // todo: Call the method here to send the messages to subscribers
+                // Call sendMessage method to send the message
+                userChannel.sendMessage(channelName, message);
             }
         } catch (Exception e) {
             System.err.println("Error When Displaying the Message in User Channel");
@@ -30,10 +31,10 @@ public class UserChannel{
 
     public static void main(String[] args) {
         UserChannel userChannel = new UserChannel();
-        userChannel.setName("");
+        userChannel.setName("Sachini");
 
         // Create frame
-        JFrame frame = new JFrame(userChannel.getName() + "User Channel");
+        JFrame frame = new JFrame(userChannel.getName() + "'s User Channel");
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -46,7 +47,7 @@ public class UserChannel{
         messageDisplayArea.setWrapStyleWord(true);
 
         // Create a custom TitledBorder for the title
-        TitledBorder titledBorder = BorderFactory.createTitledBorder(userChannel.getName() + "User Channel");
+        TitledBorder titledBorder = BorderFactory.createTitledBorder(userChannel.getName() + "'s User Channel");
         titledBorder.setTitleFont(new Font("SansSerif", Font.BOLD, 16));  // Set custom font size to 16
         messageDisplayArea.setBorder(titledBorder);
         messageDisplayArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -121,23 +122,44 @@ public class UserChannel{
         userChannel.addSubscriber(subscriber2);
     }
 
+    @Override
     public String getName() {
-        // todo: code to return the name
-        return "";
+        return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
+    public void sendMessage(String channelName, String message) {
+        try {
+            if (!subscribers.isEmpty()) {
+                for (Subscriber subscriber : subscribers) {
+                    subscriber.displayMessage(channelName + ": " + message);
+                }
+            } else {
+                throw new NoSubscribersException();
+            }
+        } catch (NoSubscribersException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     // Add a subscriber to the list
+    @Override
     public void addSubscriber(Subscriber subscriber) {
-        // todo: code to add subscribers to subscriber list
+        try {
+            subscribers.add(subscriber);
+        } catch (Exception ex) {
+            System.err.println("Error adding subscribers to user channel");
+        }
     }
 
     // Return Subscribers
+    @Override
     public List<Subscriber> getSubscribers() {
-        // todo: code to rerun the subscriber list
-        return null;
+        return subscribers;
     }
 }

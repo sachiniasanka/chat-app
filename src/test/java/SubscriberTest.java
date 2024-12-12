@@ -23,7 +23,6 @@ public class SubscriberTest {
         assertTrue(subscriber.messageArea.getText().contains("Test Message"));
     }
 
-    // note : This test doesn't fail in the assignment one, because this test the UI of the application not the logic
     @Test
     public void testDisplayMessage_whenUnsubscribed() {
         subscriber.subscribed = false;
@@ -41,13 +40,11 @@ public class SubscriberTest {
         assertTrue(subscriber.messageArea.getText().contains("Test message"));
     }
 
-    // note : This test doesn't fail in the assignment one, because this test the UI of the application not the logic
     @Test
     public void testDisplayMessage_defaultText() {
         assertTrue(subscriber.messageArea.getText().contains("You are currently not subscribed. Please subscribe to receive messages."));
     }
 
-    // note : This test doesn't fail in the assignment one, because this test the UI of the application not the logic
     @Test
     public void testDisplayMessage_defaultText_whenClickedSubscribeButton() {
         JButton subButton = subscriber.getSubscribeButton();
@@ -55,7 +52,6 @@ public class SubscriberTest {
         assertTrue(subscriber.messageArea.getText().contains("Subscribed. You will now receive messages."));
     }
 
-    // note : This test doesn't fail in the assignment one, because this test the UI of the application not the logic
     @Test
     public void testDisplayMessage_defaultText_whenClickedUnsubscribeButton() {
         JButton unsubButton = subscriber.getUnsubscribeButton();
