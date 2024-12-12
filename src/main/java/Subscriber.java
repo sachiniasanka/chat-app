@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Subscriber {
+public class Subscriber implements ISubscriber {
     JTextArea messageArea;
     boolean subscribed = false;
     // Create buttons for subscribing and unsubscribing
@@ -14,7 +14,7 @@ public class Subscriber {
     public Subscriber(String channelName) {
         try {
             // Create the subscriber frame
-            frame = new JFrame(channelName + "Subscriber");
+            frame = new JFrame(channelName + "'s Subscriber");
             frame.setSize(400, 400);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
@@ -64,8 +64,19 @@ public class Subscriber {
         }
     }
 
+    @Override
     public void displayMessage(String message) {
-        // todo: code to display the message that received from the channel
+        try {
+            if (subscribed) {
+                if (message != null) {
+                    messageArea.append(message + "\n");
+                } else {
+                    throw new IllegalArgumentException("Message cannot be null.");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public JButton getSubscribeButton() {
