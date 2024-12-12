@@ -14,7 +14,8 @@ This is a desktop-based, real-time Publish/ Subscribe (Pub/Sub) Chat Application
 
 ## Git Branches
 Checkout to
-1. Branch "assignment_1" or main to access the code that are related to assignment 1
+1. Branch "assignment_1" to access the code that are related to assignment 1
+2. Branch "assignment_2" to or branch "main" to access the code that are related to assignment 2
 
 ## Run Application
 1. Run the Java file: UserChannel.java
@@ -27,12 +28,9 @@ Checkout to
    ```bash
    ** path **
    src/test/java/SubscriberTest.java
-
-Note : Some tests of the of SubscriberTest.java file is not failing for assigment 1 code, because those tests the UI
-behaviour of the application not the logic
    
 2. Run channel related tests: UserChannelTest.java
    ```bash
    ** path **
-   src/test/java/UserChannelTest.java 
+   src/test/java/UserChannelTest.java
 
